@@ -9,6 +9,7 @@
 <body>
   <% if current_user %>
     Signed in as <%= current_user.username %> |
+    <%= link_to "Submit", submit_path %> |
     <%= link_to "Sign out", signout_path %>
   <% else %>
     <%= link_to "Sign in with Twitter", "/auth/twitter" %>
