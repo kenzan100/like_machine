@@ -13,6 +13,14 @@ class ArticlesController < ApplicationController
     @article.save!
     redirect_to root_path, notice: 'article created :)'
   end
+
+  def like
+    @liked_article_id = params[:liked_article_id]
+    article = Article.find(@liked_article_id)
+    article.likes.find_or_create_by!(user_id: current_user.id)
+    @liked_count = article.likes.count
+  end
+
   private
 
   def article_params
