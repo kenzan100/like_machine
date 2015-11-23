@@ -1,4 +1,9 @@
-<% @articles.each do |article| %>
-  <%= article.title %>
-  <%= article.url %>
+<% @articles.each do |date, articles| %>
+  <div class="each_day">
+    <h2><%= date %></h2>
+    <% articles.each do |article| %>
+      <%= article.title %>
+      <%= article.url %>
+    <% end %>
+  </div>
 <% end %>
