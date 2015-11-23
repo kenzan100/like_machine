@@ -48,4 +48,5 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'selenium-webdriver'
   gem 'launchy'
+  gem 'rack_session_access'
 end
