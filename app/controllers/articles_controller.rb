@@ -1,10 +1,10 @@
 class ArticlesController < ApplicationController
   def index
     articles = Article.joins("LEFT JOIN likes ON articles.id = likes.article_id")
-                      .select("articles.*, SUM( CASE WHEN likes.liked = 't' THEN 1 ELSE 0 END) AS like_cnt")
+                      .select("articles.*, DATE(articles.posted_at) AS posted_date, SUM( CASE WHEN likes.liked = 't' THEN 1 ELSE 0 END) AS like_cnt")
                       .group("articles.id")
-                      .order("like_cnt DESC, posted_at DESC")
-    @articles = articles.group_by{ |a| a.posted_at.beginning_of_day }
+                      .order("posted_date DESC, like_cnt DESC")
+    @articles = articles.group_by{ |a| a.posted_date }
   end
 
   def new
