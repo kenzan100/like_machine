@@ -4,8 +4,8 @@
     <% articles.each do |article| %>
       <div style="padding: 20px;">
         <%= link_to article.title, article.url, target: '_blank' %>
-        <%= render partial: 'article_like_box', locals: { article: article } %>
-        <% if current_user.articles.exists?(article.id) %>
+        <%= render partial: 'article_like_box', locals: { article: article, like_cnt: article.like_cnt } %>
+        <% if current_user && current_user.articles.exists?(article.id) %>
           <%= link_to 'delete', article_path(article.id), method: :delete %>
         <% end %>
       </div>

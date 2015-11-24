@@ -1,6 +1,6 @@
 <div id="like_count_for_article_<%=article.id%>">
-  <%= pluralize(article.likes.where(liked: true).count, 'like') %>
-  <% if current_user.likes.exists?(article_id: article.id, liked: true) %>
+  <%= pluralize(like_cnt, 'like') %>
+  <% if current_user && current_user.likes.exists?(article_id: article.id, liked: true) %>
     <%= link_to '💔', like_article_path(liked_article_id: article.id), remote: true %>
   <% elsif current_user %>
     <%= link_to '❤', like_article_path(liked_article_id: article.id), remote: true %>

@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.order(posted_at: :desc)
-                       .sort_by{ |a| -1 * a.likes.where(liked: true).count }
-                       .group_by{ |a| a.posted_at.beginning_of_day }
+    articles = Article.joins("LEFT JOIN likes ON articles.id = likes.article_id")
+                      .select("articles.*, SUM( CASE WHEN likes.liked = 't' THEN 1 ELSE 0 END) AS like_cnt")
+                      .group("articles.id")
+                      .order("like_cnt DESC, posted_at DESC")
+    @articles = articles.group_by{ |a| a.posted_at.beginning_of_day }
   end
 
   def new
@@ -26,6 +28,7 @@ class ArticlesController < ApplicationController
       like_record.toggle(:liked)
     end
     like_record.save!
+    @article_like_cnt = @article.likes.where(liked: true).count
   end
 
   def destroy

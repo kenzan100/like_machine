@@ -1,3 +1,3 @@
 $article_like_box = $("#like_count_for_article_<%= @liked_article_id %>");
-$article_like_box.html("<%= j( render('article_like_box', article: @article ) ) %>");
+$article_like_box.html("<%= j( render('article_like_box', article: @article, like_cnt: @article_like_cnt ) ) %>");
 $article_like_box.find('a').animate({ "font-size": "24px" }, 500, function(){ $(this).animate({"font-size": "16px"}, 500)});
