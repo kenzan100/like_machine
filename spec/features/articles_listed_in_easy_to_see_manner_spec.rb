@@ -11,7 +11,7 @@ describe 'articles are easy to read' do
 
     visit articles_path
     expect(page.all(:css, '.each_day').size).to eq 3
-    expect(page.body).to match(/article_at60.*article_at25.*article_at10.*article_at0/m)
+    expect(page.body).to match(/article_at60.*article_at25.*article_at0/m)
   end
 
   it "is orderd by highest like count within each day" do
@@ -22,7 +22,7 @@ describe 'articles are easy to read' do
       })
       like_count.times do |i|
         user = FactoryGirl.create(:user)
-        article.likes.create!(user_id: user.id)
+        article.likes.create!(user_id: user.id, liked: true)
       end
     end
 
