@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.order(posted_at: :desc).group_by{ |a| a.posted_at.beginning_of_day }
+    @articles = Article.order(posted_at: :desc)
+                       .sort_by{ |a| -1 * a.likes.where(liked: true).count }
+                       .group_by{ |a| a.posted_at.beginning_of_day }
   end
 
   def new
@@ -16,9 +18,14 @@ class ArticlesController < ApplicationController
 
   def like
     @liked_article_id = params[:liked_article_id]
-    article = Article.find(@liked_article_id)
-    article.likes.find_or_create_by!(user_id: current_user.id)
-    @liked_count = article.likes.count
+    @article = Article.find(@liked_article_id)
+    like_record = @article.likes.find_or_initialize_by(user_id: current_user.id)
+    if like_record.new_record?
+      like_record.liked = true
+    else
+      like_record.toggle(:liked)
+    end
+    like_record.save!
   end
 
   private
