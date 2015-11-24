@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :likes
+  has_many :articles, foreign_key: :posted_by
 
   def self.from_omniauth(auth_hash)
     where(auth_hash.slice("provider", "uid")).first \
