@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LikeMachine</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title>Like Machine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user %>
-    Signed in as <%= current_user.username %> |
-    <%= link_to "Submit", submit_path %> |
-    <%= link_to "Sign out", signout_path %>
-  <% else %>
-    <%= link_to "Sign in with Twitter", "/auth/twitter" %>
-  <% end %>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Like Machine", root_path, class: 'navbar-brand' %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <% if current_user %>
+          <li>
+            <%= link_to "Submit", submit_path %>
+          </li>
+          <li>
+            <%= link_to "Sign out", signout_path %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Sign in with Twitter", "/auth/twitter" %>
+          </li>
+        <% end %>
+      </ul>
+      <% if current_user %>
+        <p class="navbar-text navbar-right" style="padding-right: 15px;">
+          Signed in as <%= current_user.username %>
+        </p>
+      <% end %>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
   <%= yield %>
+</div>
 </body>
 </html>

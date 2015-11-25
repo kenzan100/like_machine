@@ -13,3 +13,36 @@
  *= require_tree .
  *= require_self
  */
+
+body{
+  padding-top: 70px;
+}
+
+.like_count_box a{
+  vertical-align: middle;
+  text-decoration: none;
+}
+.like_count_box a.heartbreak{
+  font-size: 18px;
+}
+.like_count_box a.heartbeat{
+  font-size: 30px;
+}
+
+.like_count_box a:hover{
+  text-decoration: none;
+}
+
+.article_title {
+  font-size: 1.6em;
+}
+
+.each_day > div{
+  padding: 20px 10px;
+}
+
+.each_day > h3{
+  border-bottom: 1px solid lightgray;
+  margin-bottom: -5px;
+  padding: 4px 8px;
+}

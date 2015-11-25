@@ -1,7 +1,11 @@
 <% if current_user %>
   <%= form_for @article do |f| %>
-    <%= f.text_field :url, placeholder: 'Article URL' %>
-    <%= f.text_field :title, placeholder: 'Article Title' %>
-    <%= f.submit 'submit' %>
+    <div class="form-group">
+      <%= f.text_field :url, placeholder: 'Article URL', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :title, placeholder: 'Article Title', class: 'form-control' %>
+    </div>
+    <%= f.submit 'submit', class: 'btn btn-default' %>
   <% end %>
 <% end %>

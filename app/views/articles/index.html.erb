@@ -1,9 +1,9 @@
 <% @articles.each do |date, articles| %>
   <div class="each_day">
-    <h2><%= date.to_date %></h2>
+    <h3><%= date.to_date %></h3>
     <% articles.each do |article| %>
-      <div style="padding: 20px;">
-        <%= link_to article.title, article.url, target: '_blank' %>
+      <div>
+        <%= link_to article.title, article.url, target: '_blank', class: 'article_title' %>
         <%= render partial: 'article_like_box', locals: { article: article, like_cnt: article.like_cnt } %>
         <% if current_user && current_user.articles.exists?(article.id) %>
           <%= link_to 'delete', article_path(article.id), method: :delete %>

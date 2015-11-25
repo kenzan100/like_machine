@@ -1,3 +1,5 @@
-$article_like_box = $("#like_count_for_article_<%= @liked_article_id %>");
-$article_like_box.html("<%= j( render('article_like_box', article: @article, like_cnt: @article_like_cnt ) ) %>");
-$article_like_box.find('a').animate({ "font-size": "24px" }, 500, function(){ $(this).animate({"font-size": "16px"}, 500)});
+var $article_like_box = $("#like_count_for_article_<%= @liked_article_id %>");
+var replace_html = function(){ $article_like_box.html("<%= j( render('article_like_box', article: @article, like_cnt: @article_like_cnt ) ) %>").find('a').fadeIn(2000) };
+var $like_link = $article_like_box.find('a');
+if($like_link.hasClass('heartbreak')){$like_link.animate({ "font-size": "30px" }, 500, function(){ $(this).animate({"font-size": "18px"}, 500, replace_html)});}
+if($like_link.hasClass('heartbeat')){ $like_link.animate({ "font-size": "44px" }, 500, function(){ $(this).animate({"font-size": "30px"}, 500, replace_html)});}
