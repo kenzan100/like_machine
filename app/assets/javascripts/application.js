@@ -15,6 +15,6 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function(){
+$(document).on('page:change', function(){
   $('.like_count_box a').show();
 });
