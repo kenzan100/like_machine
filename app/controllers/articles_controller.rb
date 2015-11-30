@@ -14,8 +14,11 @@ class ArticlesController < ApplicationController
   def create
     @article = current_user.articles.new(article_params)
     @article.posted_at = Time.now
-    @article.save!
-    redirect_to root_path, notice: 'article created :)'
+    if @article.save
+      redirect_to root_path, notice: 'article created :)'
+    else
+      redirect_to new_article_path(@article), alert: "#{@article.errors.full_messages.join('\n')}"
+    end
   end
 
   def like
