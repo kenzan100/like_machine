@@ -5,7 +5,8 @@ describe 'articles are easy to read' do
     [0, 10, 25, 60].each do |time_in_hours|
       FactoryGirl.create(:article, {
         title: ('article_at' + time_in_hours.to_s),
-        posted_at: Time.zone.now.beginning_of_day.advance(hours: time_in_hours)
+        posted_at: Time.zone.now.beginning_of_day.advance(hours: time_in_hours),
+        posted_by: 1
       })
     end
 
@@ -18,7 +19,8 @@ describe 'articles are easy to read' do
     [[0, 1], [5, 2], [10, 0]].each do |time_in_hours, like_count|
       article = FactoryGirl.create(:article, {
         title: ('article_at' + time_in_hours.to_s),
-        posted_at: Time.zone.now.beginning_of_day.advance(hours: time_in_hours)
+        posted_at: Time.zone.now.beginning_of_day.advance(hours: time_in_hours),
+        posted_by: 1
       })
       like_count.times do |i|
         user = FactoryGirl.create(:user)
