@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = Article.new(url: params[:url], title: params[:title])
   end
 
   def create
@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to root_path, notice: 'article created :)'
     else
-      redirect_to new_article_path(@article), alert: "#{@article.errors.full_messages.join('\n')}"
+      redirect_to new_article_path(url: @article.url, title: @article.title), alert: "#{@article.errors.full_messages.join(' / ')}"
     end
   end
 

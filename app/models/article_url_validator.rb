@@ -6,7 +6,9 @@ class ArticleUrlValidator < ActiveModel::Validator
 
   def validate_url
     uri = URI.parse(@record.url)
-    uri.kind_of?(URI::HTTP)
+    if !uri.kind_of?(URI::HTTP)
+      raise URI::InvalidURIError
+    end
   rescue URI::InvalidURIError
     @record.errors[:base] << "URL you entered isn't valid"
   end
